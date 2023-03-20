@@ -1,0 +1,44 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BovControl",
+    "description": "API para teste BovControl",
+    "version": "1.0"
+  },
+  "host": "localhost:8001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "oauth2",
+      "description": "Autenticação",
+      "flows": {
+        "implicit": {
+          "authorizationUrl": "http://localhost:8001/oauth/authorize",
+          "scopes": {
+            "read:farms": "Lista de fazendas"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/oauth/authorize": {
+      "post": {
+        "description": "Gera o token de acesso.",
+        "operationId": "AUTH_AUTHORIZE_POST",
+        "responses": {}
+      }
+    },
+    "/farms": {
+      "get": {
+        "description": "Traz as listas de fazendas cadastradas.",
+        "operationId": "FARMS_GET",
+        "responses": {},
+        "security": [ { "bearerAuth": ["read:farms"] } ]
+      }
+    }
+  }
+}
